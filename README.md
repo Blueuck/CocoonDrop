@@ -84,7 +84,7 @@ pip install pyqt5 catbox-uploader requests
 ## 🚀 Usage
 
 ```bash
-git clone https://github.com/Blueuck/CocoonDrop.git
+git clone https://github.com/listentosmoke/CocoonDrop.git
 cd cocoondrop
 python cocoondrop.py
 ```
